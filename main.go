@@ -1,13 +1,11 @@
 package main
 
 import (
-	"fmt"
-
 	"github.com/sudheej/gochi/engine"
+	"github.com/sudheej/gochi/intro"
 )
 
 func main() {
-	fmt.Println("Test package")
-	fmt.Println(engine.Morning)
+	intro.OpeningArt()
 	engine.MavenRunner()
 }
