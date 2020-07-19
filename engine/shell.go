@@ -49,7 +49,8 @@ func executor(invocation string, cmdx string, params ...string) {
 
 	err = cmd.Start()
 	if err != nil {
-		fmt.Fprintln(writer, "Error starting Cmd", err.Error()[:100])
+
+		fmt.Fprintln(writer, "Error starting Cmd", err.Error())
 		s.Stop()
 		writer.Stop()
 		return
@@ -57,7 +58,7 @@ func executor(invocation string, cmdx string, params ...string) {
 
 	err = cmd.Wait()
 	if err != nil {
-		fmt.Fprintln(writer, "Error waiting for Cmd", err.Error()[:100])
+		fmt.Fprintln(writer, "Error waiting for Cmd", err.Error())
 		s.Stop()
 		writer.Stop()
 		return
