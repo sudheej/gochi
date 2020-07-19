@@ -13,8 +13,14 @@ import (
 
 //MavenRunner is the function is to run Maven commands
 func MavenRunner() {
-	params := []string{"-f", "C:\\Users\\sudhe\\Documents\\playground\\Spring-Boot-Sample-Project-master\\Spring-Boot-Sample-Project-master\\pom.xml", "clean", "install", "-Dskiptests"}
+	defer timeTrack(time.Now(), "Maven Build")
+	params := []string{"-f", "C:\\Users\\sudhe\\Documents\\playground\\Spring-Boot-Sample-Project-master\\Spring-Boot-Sample-Project-master\\pom.xml", "dependency-check:check", "install", "-Dskiptests"}
 	executor("Maven Build", "mvn", params...)
+}
+
+func timeTrack(start time.Time, name string) {
+	elapsed := time.Since(start)
+	fmt.Printf("%s took %d sec ...\n", name, elapsed.Milliseconds()/1000)
 }
 
 func executor(invocation string, cmdx string, params ...string) {
@@ -65,5 +71,6 @@ func executor(invocation string, cmdx string, params ...string) {
 	}
 	s.Stop()
 	writer.Stop()
+	fmt.Println(invocation + " completed..")
 
 }
