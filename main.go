@@ -10,6 +10,8 @@ import (
 
 func main() {
 	intro.OpeningArt()
+	fmt.Println("Testing yaml feature")
+	engine.YamlParser(".gochi.yml")
 	start := time.Now()
 	engine.MavenRunner()
 	elapsed := time.Since(start)
