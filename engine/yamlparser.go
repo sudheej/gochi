@@ -8,6 +8,23 @@ import (
 	"gopkg.in/yaml.v2"
 )
 
+func walk(v interface{}) {
+	switch v := v.(type) {
+	case []interface{}:
+		for i, v := range v {
+			fmt.Println("index:", i)
+			walk(v)
+		}
+	case map[interface{}]interface{}:
+		for k, v := range v {
+			fmt.Println("key:", k)
+			walk(v)
+		}
+	default:
+		fmt.Println(v)
+	}
+}
+
 //YamlParser would enable files to be parsed and the values to be used by the requester.
 func YamlParser(fileName string) {
 	fmt.Println("Parsing YAML file")
@@ -20,17 +37,6 @@ func YamlParser(fileName string) {
 	if err != nil {
 		log.Fatalf("error: %v", err)
 	}
-	fmt.Printf("--- m:\n%v\n\n", m)
-	for k, v := range m {
-		fmt.Println("k:", k, "v:", v)
 
-	}
-
-	/*
-		d, err := yaml.Marshal(&m)
-		if err != nil {
-			log.Fatalf("error: %v", err)
-		}
-		fmt.Printf("--- m dump:\n%s\n\n", string(d))
-	*/
+	walk(m)
 }
