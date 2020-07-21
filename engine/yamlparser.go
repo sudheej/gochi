@@ -23,6 +23,7 @@ func YamlParser(fileName string) {
 	fmt.Printf("--- m:\n%v\n\n", m)
 	for k, v := range m {
 		fmt.Println("k:", k, "v:", v)
+
 	}
 
 	/*
