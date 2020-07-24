@@ -12,9 +12,9 @@ import (
 )
 
 //MavenRunner is the function is to run Maven commands
-func MavenRunner() {
+func MavenRunner(goals string) {
 	defer timeTrack(time.Now(), "Maven Build")
-	params := []string{"-f", "C:\\Users\\sudhe\\Documents\\playground\\Spring-Boot-Sample-Project-master\\Spring-Boot-Sample-Project-master\\pom.xml", "dependency-check:check", "install", "-Dskiptests"}
+	params := []string{"-f", "C:\\Users\\sudhe\\Documents\\playground\\Spring-Boot-Sample-Project-master\\Spring-Boot-Sample-Project-master\\pom.xml", goals}
 	executor("Maven Build", "mvn", params...)
 }
 

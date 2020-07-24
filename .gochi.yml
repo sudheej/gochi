@@ -1,7 +1,10 @@
 steps:
   execute:
   - mvn : 1.9.3
-    goals: 'clean install'
+    goals: 'validate'
+    concurrent: false
+  - mvn : 1.9.3
+    goals: 'install'
     concurrent: false
   - mvn : 1.9.3
     goals: 'dependency-check:check'
