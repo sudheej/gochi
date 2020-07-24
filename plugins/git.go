@@ -11,7 +11,7 @@ import (
 func GitClone() {
 	// Clone the given repository to the given directory
 
-	_, err := git.PlainClone("./download", false, &git.CloneOptions{
+	_, err := git.PlainClone("./.temp", false, &git.CloneOptions{
 		URL:      "https://github.com/eiselems/spring-boot-microservices",
 		Progress: os.Stdout,
 	})
