@@ -5,6 +5,7 @@ import (
 	"fmt"
 	"os"
 	"os/exec"
+	"path/filepath"
 	"time"
 
 	"github.com/briandowns/spinner"
@@ -14,7 +15,7 @@ import (
 //MavenRunner is the function is to run Maven commands
 func MavenRunner(goals string) {
 	defer timeTrack(time.Now(), "Maven Build")
-	params := []string{"-f", "C:\\Users\\sudhe\\Documents\\playground\\Spring-Boot-Sample-Project-master\\Spring-Boot-Sample-Project-master\\pom.xml", goals}
+	params := []string{"-f", filepath.FromSlash(".temp/pom.xml"), goals}
 	executor("Maven Build", "mvn", params...)
 }
 
