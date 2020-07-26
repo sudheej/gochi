@@ -5,6 +5,7 @@ A Continous Integration Server built with Golang.
 ```
 Under Development
 ```
+![gochi-demo](https://github.com/sudheej/gochi/blob/master/demo/gochidemo.gif)
 
 ## Getting Started
 

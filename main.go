@@ -1,15 +1,12 @@
 package main
 
 import (
-	"fmt"
-
 	"github.com/sudheej/gochi/intro"
 	"github.com/sudheej/gochi/queue"
 )
 
 func main() {
 	intro.OpeningArt()
-	fmt.Println("Testing yaml feature")
 	queue.Process()
 	//fmt.Println("Memory ", debugger.GetMemory())
 	//start := time.Now()

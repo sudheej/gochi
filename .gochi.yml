@@ -4,11 +4,8 @@ vcs:
 steps:
   execute:
   - mvn : 1.9.3
-    goals: 'validate'
+    goals: 'clean'
     concurrent: false
   - mvn : 1.9.3
     goals: 'install'
-    concurrent: false
-  - mvn : 1.9.3
-    goals: 'test'
     concurrent: false
