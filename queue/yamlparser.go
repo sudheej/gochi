@@ -13,7 +13,8 @@ import (
 func YamlParser(fileName string) (result plugins.Data) {
 	fmt.Println("Parsing YAML file")
 	str, err := ioutil.ReadFile(fileName)
-
+	fmt.Println("------------------")
+	fmt.Printf("%+v\n", result)
 	//var result plugins.Data
 	yaml.Unmarshal([]byte(str), &result)
 	fmt.Println(result)

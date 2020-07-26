@@ -10,6 +10,8 @@ import (
 func Process() {
 
 	result := YamlParser(".gochi.yml")
+	//Execution VCS operations
+
 	for _, e := range result.Steps.Execute {
 		fmt.Println()
 		switch os := e.Concurrent; os {

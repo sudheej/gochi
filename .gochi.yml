@@ -1,3 +1,6 @@
+vcs:
+  git:
+  - url: https://github.com/eiselems/spring-boot-microservices
 steps:
   execute:
   - mvn : 1.9.3
@@ -7,5 +10,5 @@ steps:
     goals: 'install'
     concurrent: false
   - mvn : 1.9.3
-    goals: 'dependency-check:check'
+    goals: 'test'
     concurrent: false
