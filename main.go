@@ -4,14 +4,12 @@ import (
 	"fmt"
 
 	"github.com/sudheej/gochi/intro"
-	"github.com/sudheej/gochi/plugins"
 	"github.com/sudheej/gochi/queue"
 )
 
 func main() {
 	intro.OpeningArt()
 	fmt.Println("Testing yaml feature")
-	plugins.GitClone()
 	queue.Process()
 	//fmt.Println("Memory ", debugger.GetMemory())
 	//start := time.Now()

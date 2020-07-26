@@ -1,6 +1,6 @@
 vcs:
-  git:
-  - url: https://github.com/eiselems/spring-boot-microservices
+    git:
+    - url: https://github.com/eiselems/spring-boot-microservices
 steps:
   execute:
   - mvn : 1.9.3
