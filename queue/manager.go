@@ -4,6 +4,7 @@ import (
 	"fmt"
 
 	"github.com/sudheej/gochi/engine"
+	"github.com/sudheej/gochi/plugins"
 )
 
 //Process would be the invocation point to read the configuration file and execution operations
@@ -11,6 +12,12 @@ func Process() {
 
 	result := YamlParser(".gochi.yml")
 	//Execution VCS operations
+
+	for _, e := range result.Vcs.Git {
+		fmt.Println("Cloning..", e.URL)
+		plugins.GitClone(e)
+
+	}
 
 	for _, e := range result.Steps.Execute {
 		fmt.Println()

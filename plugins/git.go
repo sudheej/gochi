@@ -21,7 +21,7 @@ func GitClone(g Git) {
 		Progress: os.Stdout,
 	})
 
-	if err == nil {
+	if err != nil {
 		fmt.Println(err)
 	}
 
