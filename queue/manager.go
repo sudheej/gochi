@@ -18,7 +18,7 @@ func Process() {
 		plugins.GitClone(e)
 
 	}
-
+	wg := New(5)
 	for _, e := range result.Steps.Execute {
 		fmt.Println()
 		switch os := e.Concurrent; os {
@@ -26,11 +26,18 @@ func Process() {
 			fmt.Println("Serial Execution")
 			engine.MavenRunner(e.Goals)
 		case true:
-			fmt.Println("Concurrent Execution Activated..")
+			fmt.Println("Concurrent Execution")
+
+			wg.Add(func() {
+				engine.MavenRunner(e.Goals)
+
+			})
+
 		default:
 			fmt.Println("Serial Execution")
 		}
 
 	}
+	wg.Wait()
 
 }

@@ -7,5 +7,8 @@ steps:
     goals: 'clean'
     concurrent: false
   - mvn : 1.9.3
+    goals: 'validate'
+    concurrent: true
+  - mvn : 1.9.3
     goals: 'install'
-    concurrent: false
+    concurrent: true
