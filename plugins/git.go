@@ -4,7 +4,7 @@ import (
 	"fmt"
 	"os"
 
-	"github.com/go-git/go-git"
+	"gopkg.in/src-d/go-git.v4"
 )
 
 //Git structure for mvn temporarily

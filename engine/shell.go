@@ -42,12 +42,13 @@ func executor(invocation string, cmdx string, params ...string) {
 	s.Start()
 
 	fmt.Println(invocation)
+	fmt.Println("\n")
 
 	writer.Start()
 	go func() {
 		for scanner.Scan() {
 			if len(scanner.Text()) > 150 {
-				fmt.Fprintf(writer, "\t > %s\n", scanner.Text()[:150])
+				fmt.Fprintf(writer, "\t > %s\n", scanner.Text()[:100])
 				writer.Flush()
 			}
 
