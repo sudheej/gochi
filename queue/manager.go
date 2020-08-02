@@ -9,7 +9,6 @@ import (
 
 //Process would be the invocation point to read the configuration file and execution operations
 func Process() {
-
 	result := YamlParser(".gochi.yml")
 	//Execution VCS operations
 

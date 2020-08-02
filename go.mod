@@ -4,9 +4,11 @@ go 1.14
 
 require (
 	bitbucket.org/bertimus9/systemstat v0.0.0-20180207000608-0eeff89b0690
+	github.com/apoorvam/goterminal v0.0.0-20180523175556-614d345c47e5
 	github.com/briandowns/spinner v1.11.1
 	github.com/cheggaaa/pb v2.0.7+incompatible // indirect
 	github.com/common-nighthawk/go-figure v0.0.0-20200609044655-c4b36f998cf2
+	github.com/daviddengcn/go-colortext v1.0.0
 	github.com/go-git/go-git v4.7.0+incompatible
 	github.com/gosuri/uilive v0.0.4
 	github.com/gosuri/uiprogress v0.0.1

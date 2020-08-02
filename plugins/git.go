@@ -1,9 +1,9 @@
 package plugins
 
 import (
-	"fmt"
 	"os"
 
+	"github.com/sudheej/gochi/stdout"
 	"gopkg.in/src-d/go-git.v4"
 )
 
@@ -16,13 +16,16 @@ type Git struct {
 func GitClone(g Git) {
 	// Clone the given repository to the given directory
 
+	stdout.ConsoleOut(true, "Git", "Cloning")
 	_, err := git.PlainClone("./.temp", false, &git.CloneOptions{
 		URL:      g.URL,
 		Progress: os.Stdout,
 	})
 
 	if err != nil {
-		fmt.Println(err)
+		stdout.ConsoleError(false, "Git", err.Error())
+	} else {
+		stdout.ConsoleOut(false, "Git", "Done..!!")
 	}
 
 }

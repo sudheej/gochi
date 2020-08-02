@@ -10,13 +10,14 @@ import (
 
 	"github.com/briandowns/spinner"
 	"github.com/gosuri/uilive"
+	"github.com/sudheej/gochi/stdout"
 )
 
 //MavenRunner is the function is to run Maven commands
 func MavenRunner(goals string) {
-	defer timeTrack(time.Now(), "Maven Build")
+	defer timeTrack(time.Now(), "Maven "+goals)
 	params := []string{"-f", filepath.FromSlash(".temp/pom.xml"), goals}
-	executor("Maven Build", "mvn", params...)
+	executor("Maven "+goals, "mvn", params...)
 }
 
 func timeTrack(start time.Time, name string) {
@@ -41,14 +42,14 @@ func executor(invocation string, cmdx string, params ...string) {
 	s := spinner.New(spinner.CharSets[9], 200*time.Millisecond)
 	s.Start()
 
-	fmt.Println(invocation)
-	fmt.Println("\n")
+	//fmt.Println(invocation)
 
 	writer.Start()
 	go func() {
 		for scanner.Scan() {
 			if len(scanner.Text()) > 150 {
-				fmt.Fprintf(writer, "\t > %s\n", scanner.Text()[:100])
+				//fmt.Fprintf(writer, "\t > %s\n", scanner.Text()[:100])
+				stdout.ConsoleOut(true, invocation, scanner.Text()[:100])
 				writer.Flush()
 			}
 
@@ -58,7 +59,8 @@ func executor(invocation string, cmdx string, params ...string) {
 	err = cmd.Start()
 	if err != nil {
 
-		fmt.Fprintln(writer, "Error starting Cmd", err.Error())
+		//fmt.Fprintln(writer, "Error starting Cmd", err.Error())
+		stdout.ConsoleOut(true, invocation, err.Error())
 		s.Stop()
 		writer.Stop()
 		return
@@ -66,13 +68,14 @@ func executor(invocation string, cmdx string, params ...string) {
 
 	err = cmd.Wait()
 	if err != nil {
-		fmt.Fprintln(writer, "Error waiting for Cmd", err.Error())
+		//fmt.Fprintln(writer, "Error waiting for Cmd", err.Error())
+		stdout.ConsoleOut(false, invocation, err.Error())
 		s.Stop()
 		writer.Stop()
 		return
 	}
 	s.Stop()
-	writer.Stop()
-	fmt.Println(invocation + " completed..")
+	//writer.Stop()
+	stdout.ConsoleOut(false, invocation, " Done !!")
 
 }

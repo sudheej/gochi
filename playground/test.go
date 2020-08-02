@@ -2,50 +2,40 @@ package main
 
 import (
 	"fmt"
-	"math/rand"
-	"sync"
+	"os"
 	"time"
 
-	"github.com/gosuri/uiprogress"
-	"github.com/gosuri/uiprogress/util/strutil"
+	"github.com/apoorvam/goterminal"
+	ct "github.com/daviddengcn/go-colortext"
 )
 
-var steps = []string{
-	"downloading source",
-	"installing deps",
-	"compiling",
-	"packaging",
-	"seeding database",
-	"deploying",
-	"staring servers",
-}
-
 func main() {
-	fmt.Println("apps: deployment started: app1, app2")
-	uiprogress.Start()
+	writer := goterminal.New(os.Stdout)
+	for i := 0; i < 5; i++ {
+		ct.Foreground(ct.Yellow, false)
+		fmt.Fprintln(writer, "I'm in yellow.")
+		writer.Print()
+		ct.ResetColor()
 
-	var wg sync.WaitGroup
-	wg.Add(1)
-	go deploy("app1", &wg)
-	wg.Add(1)
-	go deploy("app2", &wg)
-	wg.Wait()
+		time.Sleep(time.Second)
 
-	fmt.Println("apps: successfully deployed: app1, app2")
-}
+		fmt.Fprintln(writer, "Lets change above text to green.")
+		writer.Print()
+		time.Sleep(time.Second)
 
-func deploy(app string, wg *sync.WaitGroup) {
-	defer wg.Done()
-	bar := uiprogress.AddBar(len(steps)).AppendCompleted().PrependElapsed()
-	bar.Width = 50
+		// processing done here, after which color should change or text should be over-written.
+		writer.Clear()
 
-	// prepend the deploy step to the bar
-	bar.PrependFunc(func(b *uiprogress.Bar) string {
-		return strutil.Resize(app+": "+steps[b.Current()-1], 22)
-	})
+		ct.Foreground(ct.Green, false)
+		fmt.Fprintln(writer, "I'm in green now.")
+		writer.Print()
+		ct.ResetColor()
 
-	rand.Seed(500)
-	for bar.Incr() {
-		time.Sleep(time.Millisecond * time.Duration(rand.Intn(2000)))
+		fmt.Fprintln(writer, "Great!")
+		writer.Print()
+		time.Sleep(time.Second)
+
+		writer.Reset()
 	}
+
 }

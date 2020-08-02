@@ -1,11 +1,11 @@
 vcs:
     git:
-    - url: https://github.com/eiselems/spring-boot-microservices
+    - url: https://github.com/triologygmbh/dependency-check
 steps:
   execute:
   - mvn : 1.9.3
-    goals: 'validate'
+    goals: 'install'
     concurrent: true
   - mvn : 1.9.3
-    goals: 'install'
-    concurrent: false
+    goals: 'org.owasp:dependency-check-maven:check'
+    concurrent: true
