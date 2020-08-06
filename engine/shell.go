@@ -49,8 +49,9 @@ func executor(invocation string, cmdx string, params ...string) {
 		for scanner.Scan() {
 			if len(scanner.Text()) > 150 {
 				//fmt.Fprintf(writer, "\t > %s\n", scanner.Text()[:100])
-				stdout.ConsoleOut(true, invocation, scanner.Text()[:100])
-				writer.Flush()
+				//stdout.ConsoleOut(true, invocation, scanner.Text()[:100])
+				//stdout.ConsoleUI(scanner.Text()[:100])
+				//writer.Flush()
 			}
 
 		}

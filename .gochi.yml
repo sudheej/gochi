@@ -1,11 +1,17 @@
 vcs:
     git:
-    - url: https://github.com/triologygmbh/dependency-check
+    - url: https://github.com/spring-projects/spring-petclinic
 steps:
   execute:
   - mvn : 1.9.3
-    goals: 'install'
+    goals: 'clean'
     concurrent: true
   - mvn : 1.9.3
-    goals: 'org.owasp:dependency-check-maven:check'
+    goals: 'validate'
     concurrent: true
+  - mvn : 1.9.3
+    goals: 'test'
+    concurrent: true
+  - mvn : 1.9.3
+    goals: 'install'
+    concurrent: true  
