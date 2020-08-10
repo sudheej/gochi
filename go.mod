@@ -10,10 +10,12 @@ require (
 	github.com/common-nighthawk/go-figure v0.0.0-20200609044655-c4b36f998cf2
 	github.com/daviddengcn/go-colortext v1.0.0
 	github.com/gdamore/tcell v1.3.0
+	github.com/gizak/termui/v3 v3.1.0
 	github.com/go-git/go-git v4.7.0+incompatible
 	github.com/gosuri/uilive v0.0.4
 	github.com/gosuri/uiprogress v0.0.1
 	github.com/marcusolsson/tui-go v0.4.0
+	github.com/mum4k/termdash v0.12.1
 	github.com/sergi/go-diff v1.1.0 // indirect
 	github.com/vbauerster/mpb/v5 v5.2.4
 	golang.org/x/crypto v0.0.0-20200709230013-948cd5f35899 // indirect

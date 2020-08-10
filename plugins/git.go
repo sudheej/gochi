@@ -23,11 +23,11 @@ func GitClone(g Git) {
 	})
 
 	if err != nil {
-		//stdout.ConsoleError(false, "Git", err.Error())
-		stdout.ConsoleUI(err.Error())
+		stdout.ConsoleError(false, "Git", err.Error())
+		//stdout.ConsoleUI(err.Error())
 	} else {
-		//stdout.ConsoleOut(false, "Git", "Done..!!")
-		stdout.ConsoleUI("Download completed..")
+		stdout.ConsoleOut(false, "Git", "Done..!!")
+		//stdout.ConsoleUI("Download completed..")
 	}
 
 }

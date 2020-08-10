@@ -1,36 +1,45 @@
 package main
 
 import (
-	"log"
-
-	"github.com/marcusolsson/tui-go"
+	"flag"
+	"fmt"
+	"os"
+	"time"
 )
 
-func main() {
+var spinChars = `|/-\`
 
-	urlEntry := tui.NewEntry()
-	urlEntry.SetText("https://httpbin.org/get")
+type Spinner struct {
+	message string
+	i       int
+}
 
-	urlBox := tui.NewHBox(urlEntry)
-	urlBox.SetTitle("URL")
-	urlBox.SetBorder(true)
+func NewSpinner(message string) *Spinner {
+	return &Spinner{message: message}
+}
 
-	root := tui.NewVBox(urlBox)
+func (s *Spinner) Tick() {
+	fmt.Printf("%s %c \r", s.message, spinChars[s.i])
+	s.i = (s.i + 1) % len(spinChars)
+}
 
-	tui.DefaultFocusChain.Set(urlEntry)
-
-	theme := tui.NewTheme()
-	theme.SetStyle("box.focused.border", tui.Style{Fg: tui.ColorYellow, Bg: tui.ColorDefault})
-
-	ui, err := tui.New(root)
+func isTTY() bool {
+	fi, err := os.Stdout.Stat()
 	if err != nil {
-		log.Fatal(err)
+		return false
+	}
+	return fi.Mode()&os.ModeCharDevice != 0
+}
+
+func main() {
+	flag.Parse()
+	s := NewSpinner("working...")
+	isTTY := isTTY()
+	for i := 0; i < 100; i++ {
+		if isTTY {
+			s.Tick()
+		}
+		time.Sleep(100 * time.Millisecond)
 	}
 
-	ui.SetTheme(theme)
-	ui.SetKeybinding("Esc", func() { ui.Quit() })
-
-	if err := ui.Run(); err != nil {
-		log.Fatal(err)
-	}
 }

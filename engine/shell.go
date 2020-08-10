@@ -40,7 +40,7 @@ func executor(invocation string, cmdx string, params ...string) {
 
 	scanner := bufio.NewScanner(cmdReader)
 	s := spinner.New(spinner.CharSets[9], 200*time.Millisecond)
-	s.Start()
+	//s.Start()
 
 	//fmt.Println(invocation)
 
@@ -51,7 +51,8 @@ func executor(invocation string, cmdx string, params ...string) {
 				//fmt.Fprintf(writer, "\t > %s\n", scanner.Text()[:100])
 				//stdout.ConsoleOut(true, invocation, scanner.Text()[:100])
 				//stdout.ConsoleUI(scanner.Text()[:100])
-				//writer.Flush()
+				stdout.ConsoleTreat(scanner.Text()[:100])
+				writer.Flush()
 			}
 
 		}

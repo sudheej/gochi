@@ -1,37 +1,45 @@
 package stdout
 
 import (
-	"log"
-
-	"github.com/marcusolsson/tui-go"
+	"flag"
+	"fmt"
+	"os"
+	"time"
 )
 
-//ConsoleUI would be the terminals default ui interface
-func ConsoleUI(logmessages string) {
+var spinChars = `|/-\`
 
-	urlEntry := tui.NewEntry()
-	urlEntry.SetText(logmessages)
+type Spinner struct {
+	message string
+	i       int
+}
 
-	urlBox := tui.NewHBox(urlEntry)
-	urlBox.SetTitle("URL")
-	urlBox.SetBorder(true)
+func NewSpinner(message string) *Spinner {
+	return &Spinner{message: message}
+}
 
-	root := tui.NewVBox(urlBox)
+func (s *Spinner) Tick() {
+	fmt.Printf("%c %s \r", spinChars[s.i], s.message)
+	s.i = (s.i + 1) % len(spinChars)
+}
 
-	tui.DefaultFocusChain.Set(urlEntry)
-
-	theme := tui.NewTheme()
-	theme.SetStyle("box.focused.border", tui.Style{Fg: tui.ColorYellow, Bg: tui.ColorDefault})
-
-	ui, err := tui.New(root)
+func isTTY() bool {
+	fi, err := os.Stdout.Stat()
 	if err != nil {
-		log.Fatal(err)
+		return false
 	}
+	return fi.Mode()&os.ModeCharDevice != 0
+}
 
-	ui.SetTheme(theme)
-	ui.SetKeybinding("Esc", func() { ui.Quit() })
+//ConsoleTreat blah blah
+func ConsoleTreat(logmsg string) {
+	flag.Parse()
+	s := NewSpinner(logmsg)
+	isTTY := isTTY()
 
-	if err := ui.Run(); err != nil {
-		log.Fatal(err)
+	if isTTY {
+		s.Tick()
 	}
+	time.Sleep(100 * time.Millisecond)
+
 }
